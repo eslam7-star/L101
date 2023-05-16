@@ -14,6 +14,9 @@ import java.util.ResourceBundle;
 
 public class LibraryController implements Initializable {
 
+
+    @FXML
+    private PasswordField pass;
     @FXML
     private ComboBox<String> Type;
     @FXML
@@ -119,6 +122,8 @@ public class LibraryController implements Initializable {
         userstable.getItems().addAll(HelloApplication.library.getUsers());
         allbooks = FXCollections.observableArrayList(HelloApplication.library.getBooks());
         bookTable.getItems().addAll(allbooks);
+        ObservableList<String> options = FXCollections.observableArrayList("Librarian", "Reader");
+        Type.setItems(options);
     }
 
 
@@ -178,27 +183,80 @@ public class LibraryController implements Initializable {
             // Remove the user from the observable list
             allUsers.remove(selectedUser);
         }
+        userstable.getItems().clear();
+        userstable.getItems().addAll(allUsers);
     }
 
 
     @FXML
     void addUser() {
+        User newUser;
         String firstName = firstNameTextField.getText();
         String lastName = lastNameTextField.getText();
         String address = addressTextField.getText();
         String cellPhone = cellPhoneTextField.getText();
         String email = emailTextField.getText();
+        String password = pass.getText();
         String type = Type.getValue(); // Get the selected user type from the ComboBox
         if ( type.equals("Reader")){
-            User newUser = new Reader(firstName, lastName, address, cellPhone, email, type);
+            newUser = new Reader(password,firstName, lastName, address, cellPhone, email);
         }else {
-            User newUser = new Librarian(firstName, lastName, address, cellPhone, email, type);
+            newUser = new Librarian(password,firstName, lastName, address, cellPhone, email);
         }
-        // Add the new user to the library
         HelloApplication.library.addUser(newUser);
         // Add the new user to the observable list
         allUsers.add(newUser);
         clearUserFields();
+        userstable.getItems().clear();
+        userstable.getItems().addAll(allUsers);
+    }
+
+    private void clearUserFields() {
+        firstNameTextField.clear();
+        lastNameTextField.clear();
+        addressTextField.clear();
+        cellPhoneTextField.clear();
+        emailTextField.clear();
+        pass.clear();
+        Type.getSelectionModel().clearSelection();
+    }
+
+    private void clearBookFields() {
+        titleField.clear();
+        isbnField.clear();
+        genreField.clear();
+        authorField.clear();
+    }
+
+    @FXML
+    void addBook() {
+        String title = titleField.getText();
+        String isbn = isbnField.getText();
+        String genre = genreField.getText();
+        String author = authorField.getText();
+
+        Book newBook = new Book(title,author,isbn,genre,true);
+        // Add the new book to the library
+        HelloApplication.library.addBook(newBook);
+        // Add the new book to the observable list
+        allbooks.add(newBook);
+        clearBookFields();
+        bookTable.getItems().clear();
+        bookTable.getItems().addAll(allbooks);
+    }
+
+    @FXML
+    void removeBook() {
+        Book selectedBook = bookTable.getSelectionModel().getSelectedItem();
+        if (selectedBook != null) {
+            // Remove the book from the library
+            HelloApplication.library.removeBook(selectedBook);
+
+            // Remove the book from the observable list
+            allbooks.remove(selectedBook);
+        }
+        bookTable.getItems().clear();
+        bookTable.getItems().addAll(allbooks);
     }
 
 

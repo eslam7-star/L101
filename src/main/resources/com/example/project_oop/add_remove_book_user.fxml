@@ -28,19 +28,19 @@
             <TextField fx:id="isbnField" promptText="ISBN" />
             <TextField fx:id="genreField" promptText="Genre" />
             <TextField fx:id="quantityField" promptText="Quantity" />
-            <Button fx:id="removebook" text="remove" />
-            <Button fx:id="addbook" text="add" />
+            <Button fx:id="removebook" onAction="#removeBook" text="remove" />
+            <Button fx:id="addbook" onAction="#addBook" text="add" />
          </children>
       </HBox>
       <TableView fx:id="userstable" layoutX="55.0" layoutY="353.0" prefHeight="242.0" prefWidth="1061.0">
          <columns>
-            <TableColumn prefWidth="75.0" text="ID" />
-            <TableColumn prefWidth="75.0" text="First Name" />
-            <TableColumn prefWidth="75.0" text="Last Name" />
-            <TableColumn prefWidth="150.0" text="Address" />
-            <TableColumn prefWidth="75.0" text="Phone" />
-            <TableColumn prefWidth="150.0" text="Email" />
-            <TableColumn prefWidth="75.0" text="Type" />
+            <TableColumn fx:id="ID" prefWidth="75.0" text="ID" />
+            <TableColumn fx:id="firstname" prefWidth="75.0" text="First Name" />
+            <TableColumn fx:id="lastname" prefWidth="75.0" text="Last Name" />
+            <TableColumn fx:id="Address" prefWidth="150.0" text="Address" />
+            <TableColumn fx:id="phone" prefWidth="75.0" text="Phone" />
+            <TableColumn fx:id="Email" prefWidth="150.0" text="Email" />
+            <TableColumn fx:id="type" prefWidth="75.0" text="Type" />
          </columns>
       </TableView>
       <HBox layoutX="18.0" layoutY="617.0" spacing="10">
@@ -54,7 +54,7 @@
             <ComboBox fx:id="Type" prefWidth="150.0" promptText="Type" />
          </children>
       </HBox>
-      <Button fx:id="removeuser" layoutX="449.0" layoutY="659.0" prefHeight="26.0" prefWidth="113.0" text="remove" />
-      <Button fx:id="adduser" layoutX="591.0" layoutY="659.0" prefHeight="26.0" prefWidth="112.0" text="add" />
+      <Button fx:id="removeuser" layoutX="449.0" layoutY="659.0" onAction="#removeUser" prefHeight="26.0" prefWidth="113.0" text="remove" />
+      <Button fx:id="adduser" layoutX="591.0" layoutY="659.0" onAction="#addUser" prefHeight="26.0" prefWidth="112.0" text="add" />
    </children>
 </AnchorPane>
