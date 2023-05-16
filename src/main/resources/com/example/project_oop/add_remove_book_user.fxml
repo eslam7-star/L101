@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+
+<AnchorPane prefHeight="713.0" prefWidth="1153.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.project_oop.LibraryController">
+   <children>
+      <HBox layoutX="33.0" layoutY="31.0" spacing="20.0" />
+      <TableView fx:id="bookTable" layoutX="55.0" layoutY="69.0" prefHeight="270.0" prefWidth="1058.0">
+         <columns>
+            <TableColumn fx:id="isbnColumn" prefWidth="100.0" text="ISBN" />
+            <TableColumn fx:id="titleColumn" prefWidth="200.0" text="Title" />
+            <TableColumn fx:id="authorColumn" prefWidth="150.0" text="Author" />
+            <TableColumn fx:id="genreColumn" prefWidth="100.0" text="Genre" />
+            <TableColumn fx:id="availableColumn" prefWidth="100.0" text="Available" />
+         </columns>
+      </TableView>
+      <HBox layoutX="124.0" layoutY="28.0" prefHeight="26.0" prefWidth="906.0" spacing="10">
+         <children>
+            <TextField fx:id="titleField" promptText="Title" />
+            <TextField fx:id="authorField" promptText="Author" />
+            <TextField fx:id="isbnField" promptText="ISBN" />
+            <TextField fx:id="genreField" promptText="Genre" />
+            <TextField fx:id="quantityField" promptText="Quantity" />
+            <Button fx:id="removebook" text="remove" />
+            <Button fx:id="addbook" text="add" />
+         </children>
+      </HBox>
+      <TableView fx:id="userstable" layoutX="55.0" layoutY="353.0" prefHeight="242.0" prefWidth="1061.0">
+         <columns>
+            <TableColumn prefWidth="75.0" text="ID" />
+            <TableColumn prefWidth="75.0" text="First Name" />
+            <TableColumn prefWidth="75.0" text="Last Name" />
+            <TableColumn prefWidth="150.0" text="Address" />
+            <TableColumn prefWidth="75.0" text="Phone" />
+            <TableColumn prefWidth="150.0" text="Email" />
+            <TableColumn prefWidth="75.0" text="Type" />
+         </columns>
+      </TableView>
+      <HBox layoutX="18.0" layoutY="617.0" spacing="10">
+         <children>
+            <TextField fx:id="firstNameTextField" promptText="First Name" />
+            <TextField fx:id="lastNameTextField" promptText="Last Name" />
+            <TextField fx:id="addressTextField" promptText="Address" />
+            <TextField fx:id="cellPhoneTextField" promptText="Cell Phone" />
+            <TextField fx:id="emailTextField" promptText="Email" />
+            <PasswordField fx:id="pass" promptText="Password" />
+            <ComboBox fx:id="Type" prefWidth="150.0" promptText="Type" />
+         </children>
+      </HBox>
+      <Button fx:id="removeuser" layoutX="449.0" layoutY="659.0" prefHeight="26.0" prefWidth="113.0" text="remove" />
+      <Button fx:id="adduser" layoutX="591.0" layoutY="659.0" prefHeight="26.0" prefWidth="112.0" text="add" />
+   </children>
+</AnchorPane>
