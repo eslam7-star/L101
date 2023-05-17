@@ -1,6 +1,5 @@
 package com.example.project_oop;
 import javafx.fxml.FXML;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -17,9 +16,9 @@ public class Library {
                 new Librarian("1234", "habiba", "ashraf", "addr", "0123","habiba@gmail.com")
         )));
         books = new ArrayList<>(new ArrayList<>(Arrays.asList(
-                new Book("ISBN001", "Title 1", "Author 1", "Genre 1", true),
-                new Book("ISBN002", "Title 2", "Author 2", "Genre 2", false),
-                new Book("ISBN003", "Title 3", "Author 3", "Genre 3", true)
+                new Book("ISBN001", "Title 1", 4, "Genre 1", true),
+                new Book("ISBN002", "Title 2", 4, "Genre 2", false),
+                new Book("ISBN003", "Title 3", 4, "Genre 3", true)
         )));
 
     }
@@ -66,9 +65,9 @@ public class Library {
     }
 
     // Method to search for a book by ISBN
-    public Book findBookByISBN(String isbn) {
+    public Book findBookByISBN(int isbn) {
         for (Book book : books) {
-            if (book.getISBN().equals(isbn)) {
+            if (book.getISBN() == isbn) {
                 return book;
             }
         }
@@ -86,5 +85,14 @@ public class Library {
         }
         return false; // Login failed
     }
+
+
+    // return the id of the current user or zero for null
+    public int get_User_id(User user){
+        if ( !(user == null) )
+            return user.getID();
+        return 0;
+    }
+
 
 }

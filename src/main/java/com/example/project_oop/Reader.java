@@ -1,6 +1,11 @@
 package com.example.project_oop;
 
+import java.util.ArrayList;
+
 public class Reader extends User {
+
+
+    private ArrayList<Book> user_rented_books;
 
     private boolean isBlocked;
 
@@ -8,6 +13,19 @@ public class Reader extends User {
         super(Password, FirstName, LastName, Address, CellPhone, Email);
         this.isBlocked = false;
         setType("Reader");
+    }
+
+    @Override
+    public void rent() {
+
+    }
+
+    public ArrayList<Book> getUser_rented_books() {
+        return user_rented_books;
+    }
+
+    public void setUser_rented_books(ArrayList<Book> user_rented_books) {
+        this.user_rented_books = user_rented_books;
     }
 
     public boolean isBlocked() {

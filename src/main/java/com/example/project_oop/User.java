@@ -1,5 +1,7 @@
 package com.example.project_oop;
 
+import java.util.ArrayList;
+
 public abstract class User {
 
     public static int nums = 0;
@@ -87,6 +89,8 @@ public abstract class User {
         this.Email = Email;
     }
 
+    public abstract void rent();
+
     @Override
     public String toString() {
         return "User{" +
@@ -99,6 +103,7 @@ public abstract class User {
                 ", Email='" + Email + '\'' +
                 '}';
     }
+
 
 
 

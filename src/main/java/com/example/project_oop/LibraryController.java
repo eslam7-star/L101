@@ -16,9 +16,11 @@ public class LibraryController implements Initializable {
 
 
     @FXML
+    public ComboBox<String> Type;
+    @FXML
     private PasswordField pass;
     @FXML
-    private ComboBox<String> Type;
+    private TextField isbnField;
     @FXML
     public Button removeuser;
     @FXML
@@ -57,10 +59,7 @@ public class LibraryController implements Initializable {
     private TextField genreField;
 
     @FXML
-    private TableColumn<Book, String> isbnColumn;
-
-    @FXML
-    private TextField isbnField;
+    private TableColumn<Book, Integer> isbnColumn;
 
     @FXML
     private TextField searchText,searchtext2;
@@ -104,6 +103,8 @@ public class LibraryController implements Initializable {
     private ObservableList<User> allUsers;
     private ObservableList<Book> allbooks;
 
+    private User user;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         firstname.setCellValueFactory(new PropertyValueFactory<User,String>("firstName"));
@@ -114,7 +115,7 @@ public class LibraryController implements Initializable {
         type.setCellValueFactory(new PropertyValueFactory<User,String>("Type"));
         phone.setCellValueFactory(new PropertyValueFactory<User,String>("phone"));
         titleColumn.setCellValueFactory(new PropertyValueFactory<Book,String>("title"));
-        isbnColumn.setCellValueFactory(new PropertyValueFactory<Book,String>("ISBN"));
+        isbnColumn.setCellValueFactory(new PropertyValueFactory<Book,Integer>("ISBN"));
         genreColumn.setCellValueFactory(new PropertyValueFactory<Book,String>("genre"));
         availableColumn.setCellValueFactory(new PropertyValueFactory<Book,Boolean>("available"));
         authorColumn.setCellValueFactory(new PropertyValueFactory<Book,String>("author"));
@@ -122,14 +123,20 @@ public class LibraryController implements Initializable {
         userstable.getItems().addAll(HelloApplication.library.getUsers());
         allbooks = FXCollections.observableArrayList(HelloApplication.library.getBooks());
         bookTable.getItems().addAll(allbooks);
-        ObservableList<String> options = FXCollections.observableArrayList("Librarian", "Reader");
-        Type.setItems(options);
+
     }
 
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     @FXML
-    void searchUser() {
+    public void searchUser() {
         if (!searchText.getText().isEmpty()) {
             // Create a filtered list to store the search results
             ObservableList<User> searchResults = FXCollections.observableArrayList();
@@ -161,7 +168,6 @@ public class LibraryController implements Initializable {
             // Iterate through the books list and search for matching attributes
             for (Book book : HelloApplication.library.getBooks()) {
                 if (book.getTitle().equalsIgnoreCase(searchTerm) ||
-                        book.getISBN().equalsIgnoreCase(searchTerm) ||
                         book.getGenre().equalsIgnoreCase(searchTerm) ||
                         book.getAuthor().equalsIgnoreCase(searchTerm)) {
                     // If any attribute of the book matches the search term, add it to the search results
@@ -174,10 +180,11 @@ public class LibraryController implements Initializable {
         }
     }
 
+
     @FXML
     void removeUser() {
         User selectedUser = userstable.getSelectionModel().getSelectedItem();
-        if (selectedUser != null) {
+        if (selectedUser != null && selectedUser != user) {
             // Remove the user from the library
             HelloApplication.library.removeUser(selectedUser);
             // Remove the user from the observable list
@@ -197,18 +204,23 @@ public class LibraryController implements Initializable {
         String cellPhone = cellPhoneTextField.getText();
         String email = emailTextField.getText();
         String password = pass.getText();
-        String type = Type.getValue(); // Get the selected user type from the ComboBox
-        if ( type.equals("Reader")){
-            newUser = new Reader(password,firstName, lastName, address, cellPhone, email);
-        }else {
-            newUser = new Librarian(password,firstName, lastName, address, cellPhone, email);
+        String type ;
+        type = Type.getValue(); // Get the selected user type from the ComboBox
+        if (type != null) {
+            if (type.equals("Reader")) {
+                newUser = new Reader(password, firstName, lastName, address, cellPhone, email);
+            } else {
+                newUser = new Librarian(password, firstName, lastName, address, cellPhone, email);
+            }
+            HelloApplication.library.addUser(newUser);
+            // Add the new user to the observable list
+            allUsers.add(newUser);
+            clearUserFields();
+            userstable.getItems().clear();
+            userstable.getItems().addAll(allUsers);
+        } else {
+            System.out.println("please select a Type");
         }
-        HelloApplication.library.addUser(newUser);
-        // Add the new user to the observable list
-        allUsers.add(newUser);
-        clearUserFields();
-        userstable.getItems().clear();
-        userstable.getItems().addAll(allUsers);
     }
 
     private void clearUserFields() {
@@ -218,12 +230,10 @@ public class LibraryController implements Initializable {
         cellPhoneTextField.clear();
         emailTextField.clear();
         pass.clear();
-        Type.getSelectionModel().clearSelection();
     }
 
     private void clearBookFields() {
         titleField.clear();
-        isbnField.clear();
         genreField.clear();
         authorField.clear();
     }
@@ -231,10 +241,15 @@ public class LibraryController implements Initializable {
     @FXML
     void addBook() {
         String title = titleField.getText();
-        String isbn = isbnField.getText();
+        String inputText = isbnField.getText();
+        int isbn = 1;
+        try {
+            isbn = Integer.parseInt(inputText);
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid input");
+        }
         String genre = genreField.getText();
         String author = authorField.getText();
-
         Book newBook = new Book(title,author,isbn,genre,true);
         // Add the new book to the library
         HelloApplication.library.addBook(newBook);
@@ -245,19 +260,25 @@ public class LibraryController implements Initializable {
         bookTable.getItems().addAll(allbooks);
     }
 
+
     @FXML
     void removeBook() {
         Book selectedBook = bookTable.getSelectionModel().getSelectedItem();
-        if (selectedBook != null) {
+        if (selectedBook != null && selectedBook.getISBN() == 1 ) {
             // Remove the book from the library
             HelloApplication.library.removeBook(selectedBook);
 
             // Remove the book from the observable list
             allbooks.remove(selectedBook);
+        }else {
+            assert selectedBook != null;
+            int val = selectedBook.getISBN() - 1;
+            selectedBook.setISBN(val);
         }
         bookTable.getItems().clear();
         bookTable.getItems().addAll(allbooks);
     }
+
 
 
 

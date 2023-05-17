@@ -10,8 +10,8 @@ import javafx.stage.Stage;
 
 import static com.example.project_oop.HelloApplication.loginScene;
 
-public class Controller {
-    private Stage stage_tools = new Stage();
+public class Controller extends HelloApplication{
+    private final Stage stage_tools = new Stage();
 
 
     @FXML
@@ -19,7 +19,7 @@ public class Controller {
         FXMLLoader fxmlLoader_3 = new FXMLLoader(HelloApplication.class.getResource("add_remove_book_user.fxml"));
         Parent root = fxmlLoader_3.load();
         stage_tools.setScene( new Scene(root));
-        stage_tools.setTitle("Handle Books");
+        stage_tools.setTitle("Handle Books and Users");
         stage_tools.setResizable(false);
         stage_tools.show();
     }
@@ -36,14 +36,13 @@ public class Controller {
 
     @FXML
     private void signout(ActionEvent event) throws Exception {
-        stage_tools.setScene(loginScene);
-        stage_tools.setResizable(false);
-        stage_tools.show();
+        primaryStage.show();
+        stage_tools.hide();
     }
 
     @FXML
     private void rentpage(ActionEvent event) throws Exception {
-        FXMLLoader fxmlLoader_4 = new FXMLLoader(HelloApplication.class.getResource("rent page.fxml"));
+        FXMLLoader fxmlLoader_4 = new FXMLLoader(HelloApplication.class.getResource("rent page_Librarian.fxml"));
         Parent root = fxmlLoader_4.load();
         stage_tools.setScene(new Scene(root));
         stage_tools.setTitle("Rent Page");

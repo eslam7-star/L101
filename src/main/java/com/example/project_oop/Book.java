@@ -7,12 +7,12 @@ public class Book {
     private String author;
 
     // number of copies
-    private String ISBN;
+    private int ISBN;
     private String genre;
 
     private Boolean available;
 
-    public Book(String title, String author, String ISBN, String genre , Boolean available) {
+    public Book(String title, String author, int ISBN, String genre , Boolean available) {
         this.title = title;
         this.author = author;
         this.ISBN = ISBN;
@@ -48,11 +48,11 @@ public class Book {
         this.author = author;
     }
 
-    public String getISBN() {
+    public int getISBN() {
         return ISBN;
     }
 
-    public void setISBN(String ISBN) {
+    public void setISBN(int ISBN) {
         this.ISBN = ISBN;
     }
 

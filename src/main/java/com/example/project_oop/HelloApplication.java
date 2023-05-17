@@ -15,6 +15,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 
 
 public class HelloApplication extends Application {
@@ -23,7 +24,7 @@ public class HelloApplication extends Application {
         private PasswordField passwordField;
         private ComboBox<String> userTypeComboBox;
 
-        private Stage primaryStage;
+        protected Stage primaryStage;
         public static Scene loginScene;
         private Scene librarianScene;
         private Scene readerScene;
@@ -136,14 +137,26 @@ public class HelloApplication extends Application {
             String lastName = lastNameField.getText();
             String address = addressField.getText();
             String cellPhone = cellPhoneField.getText();
+            User user;
 
             //Authenticate user and navigate to appropriate page based on user type and input values
             if (userType.equals("Librarian")) {
                 set_scene(true , stage);
-                library.addUser(new Librarian(password, firstName, lastName, address, cellPhone, email));
+                user = new Librarian(password, firstName, lastName, address, cellPhone, email);
+                library.addUser(user);
+
             } else if (userType.equals("Reader")) {
                 set_scene(false , stage);
-                library.addUser(new Reader(password, firstName, lastName, address, cellPhone, email));
+                user = new Reader(password, firstName, lastName, address, cellPhone, email);
+                library.addUser(user);
+            }
+            LibraryController lbc = new LibraryController();
+            try{
+                lbc.setUser(user);
+            }catch ( NullPointerException e )
+            {
+                e.printStackTrace();
+                System.out.println("user not found ");
             }
         });
 
@@ -175,9 +188,9 @@ public class HelloApplication extends Application {
        try {
            launch(args);
        }catch (Exception e)
-        {
+       {
            e.printStackTrace();
-        }
+       }
 
     }
 }
