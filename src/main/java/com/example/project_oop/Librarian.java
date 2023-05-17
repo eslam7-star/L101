@@ -18,8 +18,8 @@ public class Librarian extends User {
     private ArrayList<Book> rented_books;
 
 
-    public ArrayList<User> getRentals() {
-        return rentals;
+    public ArrayList<Reader> getRentals(Book book) {
+        return book.getRentals();
     }
 
     public void setRentals(ArrayList<User> rentals) {
@@ -58,9 +58,7 @@ public class Librarian extends User {
 
     @FXML
     public void rent() {
-        //User selectedUser =  userstable.getSelectionModel().getSelectedItem();
-        //Book selectedBook = bookTable.getSelectionModel().getSelectedItem();
-        //rent(selectedUser, selectedBook);
+
     }
 
 
@@ -69,57 +67,3 @@ public class Librarian extends User {
 
 
 
-class librarian_rent_controller implements Initializable {
-
-    private User user;
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public librarian_rent_controller(User user) {
-        this.user = user;
-    }
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-
-
-    }
-
-
-
-/*
-    void rent(User user, Book book) {
-        if (user == null || book == null) {
-
-            return;
-        }
-        if (!book.isAvailable()) {
-            return;
-        }
-        // Perform the rental process using the provided user and book
-        boolean rentalSuccess = HelloApplication.library.rentBook(user, book);
-        if (rentalSuccess) {
-            // Update the table views to reflect the changes
-            userstable.refresh();
-            bookTable.refresh();
-        } else {
-        }
-    }
-*/
-
-
-
-
-
-
-
-
-
-
-}

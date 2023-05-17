@@ -29,7 +29,7 @@
          <children>
             <TextField fx:id="titleField" promptText="Title" />
             <TextField fx:id="authorField" promptText="Author" />
-            <TextField fx:id="genreField1" promptText="Genre" />
+            <TextField fx:id="genreField" promptText="Genre" />
             <Label prefHeight="22.0" prefWidth="69.0" text="copies :">
                <font>
                   <Font name="Arial Black" size="14.0" />

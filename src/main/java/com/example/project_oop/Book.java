@@ -1,7 +1,12 @@
 package com.example.project_oop;
 
+import java.util.ArrayList;
+import java.util.Date;
+
 public class Book {
 
+
+    private ArrayList<Reader> rentals;
     public static int count = 0;
     private String title;
     private String author;
@@ -12,12 +17,39 @@ public class Book {
 
     private Boolean available;
 
+    private Date return_date,rent_date;
+
     public Book(String title, String author, int ISBN, String genre , Boolean available) {
         this.title = title;
         this.author = author;
         this.ISBN = ISBN;
         this.genre = genre;
         this.available = available;
+    }
+
+
+    public ArrayList<Reader> getRentals() {
+        return rentals;
+    }
+
+    public void setRentals(ArrayList<Reader> rentals) {
+        this.rentals = rentals;
+    }
+
+    public Date getReturn_date() {
+        return return_date;
+    }
+
+    public void setReturn_date(Date return_date) {
+        this.return_date = return_date;
+    }
+
+    public Date getRent_date() {
+        return rent_date;
+    }
+
+    public void setRent_date(Date rent_date) {
+        this.rent_date = rent_date;
     }
 
     public Boolean getAvailable() {

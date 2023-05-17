@@ -7,10 +7,10 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="509.0" prefWidth="793.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.project_oop.LibraryController">
+<AnchorPane prefHeight="509.0" prefWidth="793.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.project_oop.librarian_rent_controller">
    <children>
-      <Button layoutX="404.0" layoutY="463.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="92.0" text="Rent" />
-      <Button layoutX="225.0" layoutY="463.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="92.0" text="block" />
+      <Button fx:id="rentbtn" layoutX="404.0" layoutY="463.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="92.0" text="Rent" />
+      <Button fx:id="blockbtn" layoutX="225.0" layoutY="463.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="92.0" text="block" />
       <Label contentDisplay="CENTER" layoutX="26.0" layoutY="-2.0" prefHeight="46.0" prefWidth="219.0" text="Current Rentals:" textAlignment="CENTER">
          <font>
             <Font size="20.0" />
@@ -24,8 +24,8 @@
             <TableColumn fx:id="Address" prefWidth="94.39997863769531" text="Address" />
             <TableColumn fx:id="phone" prefWidth="88.800048828125" text="Phone" />
             <TableColumn fx:id="Email" prefWidth="129.5999755859375" text="Email" />
-            <TableColumn fx:id="type" prefWidth="81.60003662109375" text="Type" />
-            <TableColumn fx:id="type1" prefWidth="133.5999755859375" text="Blocked" />
+            <TableColumn fx:id="rent_date" prefWidth="81.60003662109375" text="rent date" />
+            <TableColumn fx:id="return_date" prefWidth="103.19998779296873" text="return date" />
          </columns>
       </TableView>
       <TableView fx:id="rentedtable" layoutX="26.0" layoutY="261.0" prefHeight="192.0" prefWidth="726.0">
