@@ -18,12 +18,12 @@ public class Librarian extends User {
     private ArrayList<Book> rented_books;
 
 
-    public ArrayList<User> getAdded_uers() {
-        return added_uers;
+    public ArrayList<User> getRentals() {
+        return rentals;
     }
 
-    public void setAdded_uers(ArrayList<User> added_uers) {
-        this.added_uers = added_uers;
+    public void setRentals(ArrayList<User> rentals) {
+        this.rentals = rentals;
     }
 
     public ArrayList<Book> getAdded_books() {
@@ -58,14 +58,32 @@ public class Librarian extends User {
 
     @FXML
     public void rent() {
-        User selectedUser =  userstable.getSelectionModel().getSelectedItem();
-        Book selectedBook = bookTable.getSelectionModel().getSelectedItem();
-        rent(selectedUser, selectedBook);
+        //User selectedUser =  userstable.getSelectionModel().getSelectedItem();
+        //Book selectedBook = bookTable.getSelectionModel().getSelectedItem();
+        //rent(selectedUser, selectedBook);
     }
+
+
 
 }
 
+
+
 class librarian_rent_controller implements Initializable {
+
+    private User user;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public librarian_rent_controller(User user) {
+        this.user = user;
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -75,7 +93,7 @@ class librarian_rent_controller implements Initializable {
 
 
 
-
+/*
     void rent(User user, Book book) {
         if (user == null || book == null) {
 
@@ -93,7 +111,7 @@ class librarian_rent_controller implements Initializable {
         } else {
         }
     }
-
+*/
 
 
 

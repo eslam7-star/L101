@@ -10,9 +10,8 @@ import javafx.stage.Stage;
 
 import static com.example.project_oop.HelloApplication.loginScene;
 
-public class Controller extends HelloApplication{
+public class Controller {
     private final Stage stage_tools = new Stage();
-
 
     @FXML
     private void handleAddBookUSER(ActionEvent event) throws Exception {
@@ -36,8 +35,11 @@ public class Controller extends HelloApplication{
 
     @FXML
     private void signout(ActionEvent event) throws Exception {
+        Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        primaryStage.setScene(loginScene);
+        primaryStage.setResizable(false);
         primaryStage.show();
-        stage_tools.hide();
+        stage_tools.close();
     }
 
     @FXML

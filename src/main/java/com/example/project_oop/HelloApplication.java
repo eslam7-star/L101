@@ -94,8 +94,8 @@ public class HelloApplication extends Application {
             gridPane.getChildren().addAll(emailLabel, emailTextField, passwordLabel, passwordField,
                     userTypeLabel, userTypeComboBox, loginButton);
 
-            Scene scene = new Scene(gridPane, 300, 200);
-            primaryStage.setScene(scene);
+            loginScene = new Scene(gridPane, 300, 200);
+            primaryStage.setScene(loginScene);
             primaryStage.show();
     }
 
@@ -137,13 +137,14 @@ public class HelloApplication extends Application {
             String lastName = lastNameField.getText();
             String address = addressField.getText();
             String cellPhone = cellPhoneField.getText();
-            User user;
+            User user = null;
 
             //Authenticate user and navigate to appropriate page based on user type and input values
             if (userType.equals("Librarian")) {
                 set_scene(true , stage);
                 user = new Librarian(password, firstName, lastName, address, cellPhone, email);
                 library.addUser(user);
+                new librarian_rent_controller(user);
 
             } else if (userType.equals("Reader")) {
                 set_scene(false , stage);
