@@ -2,12 +2,10 @@ package com.example.project_oop;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.URL;
@@ -23,6 +21,9 @@ public class librarian_rent_controller implements Initializable {
 
     public Label yourid;
     public Label yourlabel;
+    public Button blockbtn;
+    public Button rentbtn;
+    public Button removebtn;
     @FXML
     private TableView<Book> allbooks;
 
@@ -102,6 +103,7 @@ public class librarian_rent_controller implements Initializable {
         allbooks.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
                 // Fetch data for rentals table
+                selbook = newSelection;
                 List<Rented_Book> rentals = fetchRentals(newSelection);
                 rentaltable.setItems(FXCollections.observableArrayList(rentals));
 
@@ -110,7 +112,7 @@ public class librarian_rent_controller implements Initializable {
                 rfirstname.setCellValueFactory(new PropertyValueFactory<>("firstname"));
                 rlastname.setCellValueFactory(new PropertyValueFactory<>("lastname"));
                 rEmail.setCellValueFactory(new PropertyValueFactory<>("Email"));
-                rreturn_date.setCellValueFactory(new PropertyValueFactory<>("returnDate"));
+                rreturn_date.setCellValueFactory(new PropertyValueFactory<>("returndate"));
 
                 // Fetch data for waitlist table
                 List<Orderd_Book> waitlist = fetchWaitlist(newSelection);
@@ -121,36 +123,27 @@ public class librarian_rent_controller implements Initializable {
                 wfirstname.setCellValueFactory(new PropertyValueFactory<>("firstname"));
                 wlastname.setCellValueFactory(new PropertyValueFactory<>("lastname"));
                 wEmail.setCellValueFactory(new PropertyValueFactory<>("Email"));
-                wreturn_date.setCellValueFactory(new PropertyValueFactory<>("returnDate"));
+                wreturn_date.setCellValueFactory(new PropertyValueFactory<>("return_date"));
             }
         });
     }
-
-
 
     // Method to fetch rentals of the selected book
     private List<Rented_Book> fetchRentals(Book selectedBook) {
         return selectedBook.getRented_books();
     }
 
-
-
     private List<Orderd_Book> fetchWaitlist(Book selectedBook) {
         return selectedBook.getOrderd_books();
     }
-
-
 
     // method to fetch all books from library
     private List<Book> fetchAllBooks() {
         return HelloApplication.library.getBooks();
     }
 
-
-
-
     @FXML
-    public void rentButtonHandler() {
+    public void rentButtonHandler(ActionEvent event) {
         // Get the selected item from the waitingtable
         Orderd_Book selectedBook = waitingtable.getSelectionModel().getSelectedItem();
         if (selectedBook != null ) {
@@ -159,7 +152,7 @@ public class librarian_rent_controller implements Initializable {
             // Remove the selected book from the waitinglist
             waitingtable.getItems().remove(selectedBook);
             // Create a new Rented_Book with the selected book details and rent date
-            Rented_Book rentedBook = new Rented_Book(selectedBook.getTitle(), selectedBook.getAuthor(), selectedBook.getISBN(), selectedBook.getGenre(), selectedBook.isAvailable(),reader.getFirstName(), reader.getLastName(),reader.getEmail(),reader.getID(),selectedBook.getReturnDate() );
+            Rented_Book rentedBook = new Rented_Book(selectedBook.getTitle(), selectedBook.getAuthor(), selectedBook.getISBN(), selectedBook.getGenre(), selectedBook.isAvailable(),reader.getFirstName(), reader.getLastName(),reader.getEmail(),reader.getID(),selectedBook.getReturn_date() );
             // Add the rented book to the reader's rented books list
             reader.addrentBook(rentedBook);
             Book book = Library.findBookByRentBook(rentedBook,fetchAllBooks());
@@ -180,9 +173,12 @@ public class librarian_rent_controller implements Initializable {
         }
     }
 
-    public void removeFromWaitingList(Orderd_Book order) {
-        order = waitingtable.getSelectionModel().getSelectedItem();
+
+    @FXML
+    public void removeFromWaitingList(ActionEvent event) {
+        Orderd_Book order = waitingtable.getSelectionModel().getSelectedItem();
         selbook.getOrderd_books().remove(order);
+        waitingtable.getItems().remove(order);
         waitingtable.getItems().addAll(selbook.getOrderd_books());
         waitingtable.refresh();
         Reader reader = HelloApplication.library.findReaderById( order.ID );
@@ -190,10 +186,23 @@ public class librarian_rent_controller implements Initializable {
     }
 
 
-    public void blockReader(Rented_Book rentedBook_reader) {
-        rentedBook_reader = rentaltable.getSelectionModel().getSelectedItem();
-        Reader reader = HelloApplication.library.findReaderById(rentedBook_reader.ID);
-        reader.setBlocked(true);
+
+    @FXML
+    public void blockReader(ActionEvent event) {
+        Rented_Book rentedBook_reader = rentaltable.getSelectionModel().getSelectedItem();
+        if ( rentedBook_reader != null ) {
+            Reader reader = HelloApplication.library.findReaderById(rentedBook_reader.ID);
+            rentaltable.getItems().remove(rentedBook_reader);
+            selbook.getRented_books().remove(rentedBook_reader);
+            selbook.getRentals().remove(reader);
+            reader.setBlocked(true);
+        }else
+        {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setAlertType(Alert.AlertType.WARNING);
+            alert.setContentText("select a Rental");
+            alert.show();
+        }
     }
 
 

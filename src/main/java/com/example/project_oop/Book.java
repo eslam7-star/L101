@@ -28,7 +28,7 @@ public class Book {
 
     private Boolean available;
 
-    private LocalDate return_date,rent_date;
+   // private LocalDate return_date,rent_date;
 
     public Book(String title, String author, int ISBN, String genre , Boolean available) {
         this.title = title;
@@ -62,14 +62,6 @@ public class Book {
         this.rented_books = rented_books;
     }
 
-    public LocalDate getReturnDate() {
-        return return_date;
-    }
-
-    public void setReturnDate(LocalDate returnDate) {
-        this.return_date = returnDate;
-    }
-
 
 
     public void add_to_orderlist(Reader reader){
@@ -98,21 +90,6 @@ public class Book {
         this.rentals = rentals;
     }
 
-    public LocalDate getReturn_date() {
-        return return_date;
-    }
-
-    public void setReturn_date(LocalDate return_date) {
-        this.return_date = return_date;
-    }
-
-    public LocalDate getRent_date() {
-        return rent_date;
-    }
-
-    public void setRent_date(LocalDate rent_date) {
-        this.rent_date = rent_date;
-    }
 
     public Boolean getAvailable() {
         return available;

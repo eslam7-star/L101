@@ -135,13 +135,7 @@ public class Reader_rent_controller implements Initializable {
             // Get the selected book from the booksTable
             Book selectedBook = booksTable.getSelectionModel().getSelectedItem();
             LocalDate dt;
-            LocalDate newValue = returntime.getValue();
-            if(newValue != null) {
-                dt = newValue;
-            } else {
-                // No date selected
-                dt = LocalDate.now().plusDays(7);  // default return time after 7 days
-            }
+            dt = onSaveButtonClicked();
             if (selectedBook != null && selectedBook.isAvailable()) {
                 // Rent the book and update the tables
                 selectedBook.add_to_orderlist(reader);
@@ -167,6 +161,19 @@ public class Reader_rent_controller implements Initializable {
     }
 
 
+    @FXML
+    public LocalDate onSaveButtonClicked() {
+        LocalDate selectedDate = returntime.getValue();
+        if (selectedDate == null) {
+            // User has not selected a date
+            return LocalDate.now().plusDays(7);
+        } else {
+            // User has selected a date
+            return selectedDate;
+        }
+    }
+
+
     public Rented_Book findRentedBookByBook(Book book) {
         for (Rented_Book rentedBook : reader.getUser_rented_books()) {
             if (rentedBook.getTitle().equals(book.getTitle()) &&
@@ -179,8 +186,9 @@ public class Reader_rent_controller implements Initializable {
         return null; // No match found
     }
 
+
     @FXML
-    private void handleReturnButton() {
+    private void handleReturnButton(ActionEvent event) {
         // Get the selected book from the rentedTable1 TableView
         Book selectedBook = rentedTable1.getSelectionModel().getSelectedItem();
         Rented_Book rentedBook = findRentedBookByBook(selectedBook);
@@ -201,7 +209,7 @@ public class Reader_rent_controller implements Initializable {
                 selectedBook.setAvailable(true);
                 selectedBook.setISBN(1);
             }
-            if ( rentedBook.getReturnDate().isBefore(LocalDate.now()) ) {
+            if ( rentedBook.getReturndate().isBefore(LocalDate.now()) ) {
                 System.out.println("Book returned successfully.");
             }else
             {

@@ -54,17 +54,13 @@ public class Rented_Book extends Book{
         Email = email;
     }
 
-
-    public LocalDate getReturnDate() {
+    public LocalDate getReturndate() {
         return returndate;
     }
 
-    public void setReturnDate(LocalDate returnDate) {
-        this.returndate = returnDate;
+    public void setReturndate(LocalDate returndate) {
+        this.returndate = returndate;
     }
-
-
-
 }
 
 

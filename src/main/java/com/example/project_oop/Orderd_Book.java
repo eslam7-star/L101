@@ -11,11 +11,9 @@ public class Orderd_Book extends Book{
 
     LocalDate return_date;
 
-
-    public LocalDate returndate;
     public Orderd_Book(String title, String author, int ISBN, String genre, Boolean available , String firstname, String lastname ,int ID ,String Email , LocalDate LD) {
         super(title, author, ISBN, genre, available);
-        this.returndate = LD;
+        this.return_date = LD;
         this.firstname = firstname;
         this.lastname = lastname;
         this.Email = Email;
@@ -55,18 +53,13 @@ public class Orderd_Book extends Book{
         Email = email;
     }
 
-    public LocalDate getReturnDate() {
+    public LocalDate getReturn_date() {
         return return_date;
     }
 
-
-    public void setReturnDate(LocalDate returnDate) {
-        this.returndate = returnDate;
+    public void setReturn_date(LocalDate return_date) {
+        this.return_date = return_date;
     }
-
-
-
-
 }
 
 

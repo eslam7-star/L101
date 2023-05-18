@@ -9,9 +9,9 @@
 
 <AnchorPane prefHeight="754.0" prefWidth="1052.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.project_oop.librarian_rent_controller">
    <children>
-      <Button fx:id="blockbtn" layoutX="122.0" layoutY="306.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="92.0" text="block" />
+      <Button fx:id="blockbtn" layoutX="122.0" layoutY="306.0" mnemonicParsing="false" onAction="#blockReader" prefHeight="31.0" prefWidth="92.0" text="block" />
       <Button fx:id="rentbtn" layoutX="122.0" layoutY="389.20001220703125" mnemonicParsing="false" onAction="#rentButtonHandler" prefHeight="31.0" prefWidth="92.0" text="Rent" />
-      <Button fx:id="removebtn" layoutX="121.0" layoutY="478.3999938964844" mnemonicParsing="false" prefHeight="31.0" prefWidth="92.0" text="Remove" />
+      <Button fx:id="removebtn" layoutX="121.0" layoutY="478.3999938964844" mnemonicParsing="false" onAction="#removeFromWaitingList" prefHeight="31.0" prefWidth="92.0" text="Remove" />
       <Label contentDisplay="CENTER" layoutX="624.0" layoutY="478.0" prefHeight="46.0" prefWidth="92.0" text="All books" textAlignment="CENTER">
          <font>
             <Font size="20.0" />
