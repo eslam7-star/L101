@@ -1,5 +1,6 @@
 package com.example.project_oop;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -7,6 +8,11 @@ public class Book {
 
 
     private ArrayList<Reader> rentals;
+    private ArrayList<Reader> order_list;
+    private ArrayList<LocalDate> return_Dates;
+    private ArrayList<LocalDate> return_Dates_order_list;
+
+
     public static int count = 0;
     private String title;
     private String author;
@@ -25,7 +31,35 @@ public class Book {
         this.ISBN = ISBN;
         this.genre = genre;
         this.available = available;
+        this.order_list = new ArrayList<>();
+        this.return_Dates_order_list = new ArrayList<>();
+        this.rentals =  new ArrayList<>();
+        this.return_Dates =  new ArrayList<>();
+
     }
+
+
+
+
+    public void add_to_orderlist(Reader reader){
+        order_list.add(reader);
+    }
+
+    public void add_to_rentals(Reader reader){
+        rentals.add(reader);
+    }
+
+    public void add_to_return_Dates(LocalDate LD){
+        return_Dates.add(LD);
+    }
+
+    public void add_to_return_Dates_orderlists(LocalDate LD){
+        return_Dates_order_list.add(LD);
+    }
+
+
+
+
 
 
     public ArrayList<Reader> getRentals() {
@@ -104,6 +138,39 @@ public class Book {
                 ", ISBN='" + ISBN + '\'' +
                 ", genre='" + genre + '\'' +
                 '}';
+    }
+
+    public ArrayList<Reader> getOrder_list() {
+        return order_list;
+    }
+
+    public void setOrder_list(ArrayList<Reader> order_list) {
+        this.order_list = order_list;
+    }
+
+
+    public ArrayList<LocalDate> getReturn_Dates() {
+        return return_Dates;
+    }
+
+    public void setReturn_Dates(ArrayList<LocalDate> return_Dates) {
+        this.return_Dates = return_Dates;
+    }
+
+    public ArrayList<LocalDate> getReturn_Dates_order_list() {
+        return return_Dates_order_list;
+    }
+
+    public void setReturn_Dates_order_list(ArrayList<LocalDate> return_Dates_order_list) {
+        this.return_Dates_order_list = return_Dates_order_list;
+    }
+
+    public boolean isAvailable() {
+        if ( ISBN < 1 ) {
+            available = false;
+            return false;
+        }
+        return true;
     }
 
 

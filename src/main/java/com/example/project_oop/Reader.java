@@ -6,19 +6,23 @@ public class Reader extends User {
 
 
     private ArrayList<Book> user_rented_books;
-
     private boolean isBlocked;
+
+
 
     public Reader(String Password, String FirstName, String LastName, String Address, String CellPhone, String Email) {
         super(Password, FirstName, LastName, Address, CellPhone, Email);
         this.isBlocked = false;
         setType("Reader");
+        user_rented_books = new ArrayList<>();
+//        Book book1 = new Book("Book 1", "Author 1", 1, "gen", true);
+//        Book book2 = new Book("Book 2", "Author 2", 1, "gen", true);
+//        Book book3 = new Book("Book 3", "Author 3", 1, "gen", true);
+//        user_rented_books.add(book1);
+//        user_rented_books.add(book2);
+//        user_rented_books.add(book3);
     }
 
-    @Override
-    public void rent() {
-
-    }
 
     public ArrayList<Book> getUser_rented_books() {
         return user_rented_books;
@@ -36,24 +40,21 @@ public class Reader extends User {
         isBlocked = blocked;
     }
 
-    public void searchBooks() {
-        // Search for books in the library
-    }
-
-    public void searchUsers() {
-        // Search for users in the library
-    }
 
     public void addToOrderList(Book book) {
-        // Add the reader to the book order list
-    }
-
-    public void rentBook(Book book) {
-        // Rent a book from the library
 
     }
 
 
 
+    public void addrentBook(Book book) {
+        user_rented_books.add(book);
+
+    }
+
+    @Override
+    public void rent() {
+
+    }
 }
 

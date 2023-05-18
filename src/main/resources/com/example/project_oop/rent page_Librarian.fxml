@@ -9,8 +9,8 @@
 
 <AnchorPane prefHeight="509.0" prefWidth="793.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.project_oop.librarian_rent_controller">
    <children>
-      <Button fx:id="rentbtn" layoutX="404.0" layoutY="463.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="92.0" text="Rent" />
-      <Button fx:id="blockbtn" layoutX="225.0" layoutY="463.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="92.0" text="block" />
+      <Button fx:id="rentbtn" layoutX="350.0" layoutY="463.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="92.0" text="Rent" />
+      <Button fx:id="blockbtn" layoutX="153.0" layoutY="463.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="92.0" text="block" />
       <Label contentDisplay="CENTER" layoutX="26.0" layoutY="-2.0" prefHeight="46.0" prefWidth="219.0" text="Current Rentals:" textAlignment="CENTER">
          <font>
             <Font size="20.0" />
@@ -37,5 +37,6 @@
             <TableColumn fx:id="availableColumn" prefWidth="100.0" text="Available" />
          </columns>
       </TableView>
+      <Button fx:id="removebtn" layoutX="534.0" layoutY="463.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="92.0" text="Remove" />
    </children>
 </AnchorPane>

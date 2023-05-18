@@ -30,6 +30,7 @@ public class HelloApplication extends Application {
         private Scene readerScene;
         private Button loginButton;
         protected static Library library;
+        protected static User user;
         private Stage stage_new = new Stage();
 
 
@@ -137,19 +138,19 @@ public class HelloApplication extends Application {
             String lastName = lastNameField.getText();
             String address = addressField.getText();
             String cellPhone = cellPhoneField.getText();
-            User user = null;
 
             //Authenticate user and navigate to appropriate page based on user type and input values
             if (userType.equals("Librarian")) {
                 set_scene(true , stage);
                 user = new Librarian(password, firstName, lastName, address, cellPhone, email);
                 library.addUser(user);
-                new librarian_rent_controller(user);
+                //new librarian_rent_controller(user);
 
             } else if (userType.equals("Reader")) {
                 set_scene(false , stage);
                 user = new Reader(password, firstName, lastName, address, cellPhone, email);
                 library.addUser(user);
+                //new Reader_rent_controller((Reader) user);
             }
             LibraryController lbc = new LibraryController();
             try{

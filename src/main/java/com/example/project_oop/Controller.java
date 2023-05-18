@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import static com.example.project_oop.HelloApplication.loginScene;
+import static com.example.project_oop.HelloApplication.user;
 
 public class Controller {
     private final Stage stage_tools = new Stage();
@@ -43,11 +44,37 @@ public class Controller {
     }
 
     @FXML
-    private void rentpage(ActionEvent event) throws Exception {
+    private void rentpage_Librarian(ActionEvent event) throws Exception {
         FXMLLoader fxmlLoader_4 = new FXMLLoader(HelloApplication.class.getResource("rent page_Librarian.fxml"));
         Parent root = fxmlLoader_4.load();
         stage_tools.setScene(new Scene(root));
         stage_tools.setTitle("Rent Page");
+        stage_tools.setResizable(false);
+        stage_tools.show();
+    }
+
+/*
+    @FXML
+    private void rentpage_Reader(ActionEvent event) throws Exception {
+        FXMLLoader fxmlLoader_4 = new FXMLLoader(HelloApplication.class.getResource("rent_page_reader.fxml"));
+        Parent root = fxmlLoader_4.load();
+        Reader_rent_controller controller = fxmlLoader_4.getController();
+        controller.initialize((Reader) user);
+        stage_tools.setScene(new Scene(root));
+        stage_tools.setTitle("Rent Page");
+        stage_tools.setResizable(false);
+        stage_tools.show();
+
+    }*/
+
+
+    @FXML
+    private void rentpage_Reader(ActionEvent event) throws Exception {
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("rent_page_reader.fxml"));
+        Parent root = fxmlLoader.load();
+        stage_tools.setScene(new Scene(root));
+        stage_tools.setTitle("Rent Page");
+        stage_tools.setResizable(false);
         stage_tools.show();
     }
 

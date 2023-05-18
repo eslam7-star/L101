@@ -13,6 +13,9 @@ import java.util.ResourceBundle;
 
 public class librarian_rent_controller implements Initializable {
 
+
+    @FXML
+    private Button removebtn;
     @FXML
     private TableColumn<User,Integer> ID;
     @FXML
