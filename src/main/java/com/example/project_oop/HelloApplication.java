@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
@@ -81,10 +82,22 @@ public class HelloApplication extends Application {
                 @Override
                 public void handle(ActionEvent event) {
                     String email = emailTextField.getText(); // Get the email from the email field in your GUI
-                    String password = passwordField.getText(); // Get the password from the password field in your GUI
-                    boolean loginSuccessful = library.checkLogin(email, password); // Call the login check method
-                    if (loginSuccessful) {
-                        //
+                    String password = passwordField.getText();
+                    String type = userTypeComboBox.getTypeSelector();
+                    // Get the password from the password field in your GUI
+                    User user_1 = library.checkLogin(email, password , type); // Call the login check method
+                    if (user != null) {
+                        user = user_1;
+                        if ( user instanceof Reader )
+                        {
+                            Stage stage_login = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                            stage_login.setScene(readerScene);
+                        }
+                        else
+                        {
+                            Stage stage_login = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                            stage_login.setScene(librarianScene);
+                        }
                         System.out.println("Login successful");
                     } else {
                         signup(email, password, userTypeComboBox.getSelectionModel().getSelectedItem());

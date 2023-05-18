@@ -3,14 +3,19 @@ package com.example.project_oop;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class Book {
 
 
+    private ArrayList<Orderd_Book> orderd_books;
+    private ArrayList<Rented_Book> rented_books;
     private ArrayList<Reader> rentals;
     private ArrayList<Reader> order_list;
     private ArrayList<LocalDate> return_Dates;
     private ArrayList<LocalDate> return_Dates_order_list;
+
+    private LocalDate returndate;
 
 
     public static int count = 0;
@@ -35,11 +40,35 @@ public class Book {
         this.return_Dates_order_list = new ArrayList<>();
         this.rentals =  new ArrayList<>();
         this.return_Dates =  new ArrayList<>();
+        this.rented_books = new ArrayList<>();
+        this.orderd_books = new ArrayList<>();
 
     }
 
 
+    public ArrayList<Orderd_Book> getOrderd_books() {
+        return orderd_books;
+    }
 
+    public void setOrderd_books(ArrayList<Orderd_Book> orderd_books) {
+        this.orderd_books = orderd_books;
+    }
+
+    public ArrayList<Rented_Book> getRented_books() {
+        return rented_books;
+    }
+
+    public void setRented_books(ArrayList<Rented_Book> rented_books) {
+        this.rented_books = rented_books;
+    }
+
+    public LocalDate getReturndate() {
+        return returndate;
+    }
+
+    public void setReturndate(LocalDate returndate) {
+        this.returndate = returndate;
+    }
 
     public void add_to_orderlist(Reader reader){
         order_list.add(reader);
@@ -56,9 +85,6 @@ public class Book {
     public void add_to_return_Dates_orderlists(LocalDate LD){
         return_Dates_order_list.add(LD);
     }
-
-
-
 
 
 
@@ -172,6 +198,8 @@ public class Book {
         }
         return true;
     }
+
+
 
 
 

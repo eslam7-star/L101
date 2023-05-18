@@ -2,6 +2,7 @@ package com.example.project_oop;
 import javafx.fxml.FXML;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 
 public class Library {
@@ -44,14 +45,25 @@ public class Library {
     }
 
     // Method to search for a user by ID
-    public User findUserById(int userId) {
+    public Reader findReaderById(int userId) {
         for (User user : users) {
-            if (user.getID() == userId) {
-                return user;
+            if (user.getID() == userId && user instanceof Reader ) {
+                return (Reader)user;
             }
         }
         return null; // User not found
     }
+
+
+    public static Book findBookByRentBook(Rented_Book rentedBook, List<Book> allBooks) {
+        for (Book book : allBooks) {
+            if (book.getTitle().equals(rentedBook.getTitle())) {
+                return book;
+            }
+        }
+        return null;
+    }
+
 
     // Method to add a book to the library
     public void addBook(Book book) {
@@ -74,17 +86,19 @@ public class Library {
         return null; // Book not found
     }
 
-    public boolean checkLogin(String email, String password ) {
+
+    public User checkLogin(String email, String password , String type) {
         if ( ! users.isEmpty() )
         {
             for (User user : users) {
-                if (user.getEmail().equals(email) && user.getPassword().equals(password)) {
-                    return true; // Login successful
+                if (user.getEmail().equals(email) && user.getPassword().equals(password) && type.equals(user.getType())){
+                    return user; // Login successful
                 }
             }
         }
-        return false; // Login failed
+        return null; // Login failed
     }
+
 
 
     // return the id of the current user or zero for null

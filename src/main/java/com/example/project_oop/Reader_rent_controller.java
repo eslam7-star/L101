@@ -102,7 +102,7 @@ public class Reader_rent_controller implements Initializable {
             availableColumn1.setCellValueFactory(new PropertyValueFactory<>("available"));
 
             // Fetch rented books for the reader user from a database or use sample data
-            List<Book> rentedBooks = fetchRentedBooks();
+            List<Rented_Book> rentedBooks = fetchRentedBooks();
 
             // Add the rented books to the table
             rentedBooks.forEach(book -> rentedTable1.getItems().add(book));
@@ -123,21 +123,26 @@ public class Reader_rent_controller implements Initializable {
 
 
     // method to fetch rented books for the reader user
-    private List<Book> fetchRentedBooks() {
+    private List<Rented_Book> fetchRentedBooks() {
         return reader.getUser_rented_books();
     }
 
 
     @FXML
-    private void handleRentButton(ActionEvent event) throws InterruptedException {
-        // Get the selected book from the booksTable
-        Book selectedBook = booksTable.getSelectionModel().getSelectedItem();
-        LocalDate dt = LocalDate.now().plusDays(7);       // default return time after 7 days
-        dt = returntime.getValue();
-        if (selectedBook != null && selectedBook.isAvailable()) {
+    private void handleRentButton(ActionEvent event){
+        if (!reader.isBlocked())
+        {
+            // Get the selected book from the booksTable
+            Book selectedBook = booksTable.getSelectionModel().getSelectedItem();
+            LocalDate dt = LocalDate.now().plusDays(7);       // default return time after 7 days
+             dt = returntime.getValue();
+             if (selectedBook != null && selectedBook.isAvailable() == true ) {
             // Rent the book and update the tables
             selectedBook.add_to_orderlist(reader);
             selectedBook.add_to_return_Dates_orderlists(dt);
+            Orderd_Book od = new Orderd_Book(selectedBook.getTitle(),selectedBook.getAuthor(),selectedBook.getISBN(),selectedBook.getGenre(),selectedBook.getAvailable(),reader.getFirstName(),reader.getLastName(),reader.getID(),reader.getEmail(),dt);
+            reader.addToOrderList(od);
+            selectedBook.getOrderd_books().add(od);
             booksTable.getItems().remove(selectedBook);
             selectedBook.isAvailable();
         }else
@@ -146,23 +151,51 @@ public class Reader_rent_controller implements Initializable {
             alert.setAlertType(Alert.AlertType.WARNING);
             alert.setContentText("Book is not available");
             alert.show();
+        }}
+        else {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setAlertType(Alert.AlertType.WARNING);
+            alert.setContentText("Sorry, Your are Blocked ");
+            alert.show();
         }
     }
 
 
+    public Rented_Book findRentedBookByBook(Book book) {
+        for (Rented_Book rentedBook : reader.getUser_rented_books()) {
+            if (rentedBook.getTitle().equals(book.getTitle()) &&
+                    rentedBook.getAuthor().equals(book.getAuthor()) &&
+                    rentedBook.getISBN() == book.getISBN() &&
+                    rentedBook.getGenre().equals(book.getGenre())) {
+                return rentedBook; // Found a match
+            }
+        }
+        return null; // No match found
+    }
 
     @FXML
     private void handleReturnButton() {
         // Get the selected book from the rentedTable1 TableView
         Book selectedBook = rentedTable1.getSelectionModel().getSelectedItem();
+        Rented_Book rentedBook = findRentedBookByBook(selectedBook);
         // Check if a book is selected
         if (selectedBook != null) {
             // Remove the selected book from the user's rented books
-            reader.getUser_rented_books().remove(selectedBook);
+            reader.getUser_rented_books().remove(rentedBook);
             // Update the rentedTable1 TableView with the updated list of rented books
             rentedTable1.getItems().setAll(reader.getUser_rented_books());
             booksTable.getItems().add(selectedBook);
-            if ( (selectedBook.getReturn_Dates().get((reader.getUser_rented_books().indexOf(selectedBook)))).isBefore(LocalDate.now()) ) {
+            selectedBook.getRented_books().remove(rentedBook);
+            if ( selectedBook.getISBN() > 1 )
+            {
+                selectedBook.setISBN(selectedBook.getISBN() + 1);
+            }
+            else {
+                HelloApplication.library.getBooks().add(selectedBook);
+                selectedBook.setAvailable(true);
+                selectedBook.setISBN(1);
+            }
+            if ( rentedBook.getReturndate().isBefore(LocalDate.now()) ) {
                 System.out.println("Book returned successfully.");
             }else
             {
@@ -175,6 +208,9 @@ public class Reader_rent_controller implements Initializable {
             alert.show();
         }
     }
+
+
+
 
 
 

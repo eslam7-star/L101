@@ -7,36 +7,58 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="509.0" prefWidth="793.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.project_oop.librarian_rent_controller">
+<AnchorPane prefHeight="754.0" prefWidth="1052.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.project_oop.librarian_rent_controller">
    <children>
-      <Button fx:id="rentbtn" layoutX="350.0" layoutY="463.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="92.0" text="Rent" />
-      <Button fx:id="blockbtn" layoutX="153.0" layoutY="463.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="92.0" text="block" />
-      <Label contentDisplay="CENTER" layoutX="26.0" layoutY="-2.0" prefHeight="46.0" prefWidth="219.0" text="Current Rentals:" textAlignment="CENTER">
+      <Button fx:id="blockbtn" layoutX="122.0" layoutY="306.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="92.0" text="block" />
+      <Button fx:id="rentbtn" layoutX="122.0" layoutY="389.20001220703125" mnemonicParsing="false" onAction="#rentButtonHandler" prefHeight="31.0" prefWidth="92.0" text="Rent" />
+      <Button fx:id="removebtn" layoutX="121.0" layoutY="478.3999938964844" mnemonicParsing="false" prefHeight="31.0" prefWidth="92.0" text="Remove" />
+      <Label contentDisplay="CENTER" layoutX="624.0" layoutY="478.0" prefHeight="46.0" prefWidth="92.0" text="All books" textAlignment="CENTER">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <TableView fx:id="rentalstable" layoutX="26.0" layoutY="40.0" prefHeight="210.0" prefWidth="726.0">
+      <TableView fx:id="waitingtable" layoutX="355.0" layoutY="55.0" prefHeight="196.0" prefWidth="658.0">
          <columns>
-            <TableColumn fx:id="ID" prefWidth="47.19998550415039" text="ID" />
-            <TableColumn fx:id="firstname" prefWidth="103.20004272460938" text="First Name" />
-            <TableColumn fx:id="lastname" prefWidth="75.0" text="Last Name" />
-            <TableColumn fx:id="Address" prefWidth="94.39997863769531" text="Address" />
-            <TableColumn fx:id="phone" prefWidth="88.800048828125" text="Phone" />
-            <TableColumn fx:id="Email" prefWidth="129.5999755859375" text="Email" />
-            <TableColumn fx:id="rent_date" prefWidth="81.60003662109375" text="rent date" />
-            <TableColumn fx:id="return_date" prefWidth="103.19998779296873" text="return date" />
+            <TableColumn fx:id="wID" prefWidth="47.19998550415039" text="ID" />
+            <TableColumn fx:id="wfirstname" prefWidth="103.20004272460938" text="First Name" />
+            <TableColumn fx:id="wlastname" prefWidth="75.0" text="Last Name" />
+            <TableColumn fx:id="wEmail" prefWidth="129.5999755859375" text="Email" />
+            <TableColumn fx:id="wreturn_date" prefWidth="110.4000244140625" text="return date" />
          </columns>
       </TableView>
-      <TableView fx:id="rentedtable" layoutX="26.0" layoutY="261.0" prefHeight="192.0" prefWidth="726.0">
+      <TableView fx:id="allbooks" layoutX="340.0" layoutY="524.0" prefHeight="198.0" prefWidth="666.0">
          <columns>
-            <TableColumn fx:id="isbnColumn" prefWidth="100.0" text="ISBN" />
-            <TableColumn fx:id="titleColumn" prefWidth="200.0" text="Title" />
-            <TableColumn fx:id="authorColumn" prefWidth="150.0" text="Author" />
-            <TableColumn fx:id="genreColumn" prefWidth="100.0" text="Genre" />
-            <TableColumn fx:id="availableColumn" prefWidth="100.0" text="Available" />
+            <TableColumn fx:id="isbnColumn" prefWidth="82.4000244140625" text="ISBN" />
+            <TableColumn fx:id="titleColumn" prefWidth="109.5999755859375" text="Title" />
+            <TableColumn fx:id="authorColumn" prefWidth="93.5999755859375" text="Author" />
+            <TableColumn fx:id="genreColumn" prefWidth="121.60000610351562" text="Genre" />
+            <TableColumn fx:id="availableColumn" prefWidth="245.60003662109375" text="Available" />
          </columns>
       </TableView>
-      <Button fx:id="removebtn" layoutX="534.0" layoutY="463.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="92.0" text="Remove" />
+      <Label contentDisplay="CENTER" layoutX="630.0" layoutY="251.0" prefHeight="46.0" prefWidth="79.0" text="Rentals" textAlignment="CENTER">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label contentDisplay="CENTER" layoutX="593.0" layoutY="9.0" prefHeight="46.0" prefWidth="158.0" text="waiting order list" textAlignment="CENTER">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="yourlabel" contentDisplay="CENTER" layoutX="33.0" layoutY="60.0" prefHeight="46.0" prefWidth="170.0" textAlignment="CENTER">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="yourid" layoutX="33.0" layoutY="127.0" prefHeight="46.0" prefWidth="146.0" />
+      <TableView fx:id="rentaltable" layoutX="351.0" layoutY="291.0" prefHeight="180.0" prefWidth="658.0">
+         <columns>
+            <TableColumn fx:id="rID" prefWidth="47.19998550415039" text="ID" />
+            <TableColumn fx:id="rfirstname" prefWidth="103.20004272460938" text="First Name" />
+            <TableColumn fx:id="rlastname" prefWidth="75.0" text="Last Name" />
+            <TableColumn fx:id="rEmail" prefWidth="129.5999755859375" text="Email" />
+            <TableColumn fx:id="rreturn_date" prefWidth="110.4000244140625" text="return date" />
+         </columns>
+      </TableView>
    </children>
 </AnchorPane>

@@ -17,7 +17,6 @@ public class Librarian extends User {
     private ArrayList<User> blocked_users;
     private ArrayList<Book> rented_books;
 
-
     public ArrayList<Reader> getRentals(Book book) {
         return book.getRentals();
     }
