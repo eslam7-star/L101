@@ -16,6 +16,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+
+
+
 public class librarian_rent_controller implements Initializable {
 
     public Label yourid;
@@ -156,7 +159,7 @@ public class librarian_rent_controller implements Initializable {
             // Remove the selected book from the waitinglist
             waitingtable.getItems().remove(selectedBook);
             // Create a new Rented_Book with the selected book details and rent date
-            Rented_Book rentedBook = new Rented_Book(selectedBook.getTitle(), selectedBook.getAuthor(), selectedBook.getISBN(), selectedBook.getGenre(), selectedBook.isAvailable(),reader.getFirstName(), reader.getLastName(),reader.getEmail(),reader.getID(),selectedBook.getReturndate() );
+            Rented_Book rentedBook = new Rented_Book(selectedBook.getTitle(), selectedBook.getAuthor(), selectedBook.getISBN(), selectedBook.getGenre(), selectedBook.isAvailable(),reader.getFirstName(), reader.getLastName(),reader.getEmail(),reader.getID(),selectedBook.getReturnDate() );
             // Add the rented book to the reader's rented books list
             reader.addrentBook(rentedBook);
             Book book = Library.findBookByRentBook(rentedBook,fetchAllBooks());

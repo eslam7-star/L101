@@ -22,6 +22,47 @@ public class Rented_Book extends Book{
     }
 
 
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    public int getID() {
+        return ID;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
+    }
+
+    public String getEmail() {
+        return Email;
+    }
+
+    public void setEmail(String email) {
+        Email = email;
+    }
+
+
+    public LocalDate getReturnDate() {
+        return returndate;
+    }
+
+    public void setReturnDate(LocalDate returnDate) {
+        this.returndate = returnDate;
+    }
+
 
 
 }

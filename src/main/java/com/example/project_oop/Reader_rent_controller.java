@@ -134,17 +134,23 @@ public class Reader_rent_controller implements Initializable {
         {
             // Get the selected book from the booksTable
             Book selectedBook = booksTable.getSelectionModel().getSelectedItem();
-            LocalDate dt = LocalDate.now().plusDays(7);       // default return time after 7 days
-             dt = returntime.getValue();
-             if (selectedBook != null && selectedBook.isAvailable() == true ) {
-            // Rent the book and update the tables
-            selectedBook.add_to_orderlist(reader);
-            selectedBook.add_to_return_Dates_orderlists(dt);
-            Orderd_Book od = new Orderd_Book(selectedBook.getTitle(),selectedBook.getAuthor(),selectedBook.getISBN(),selectedBook.getGenre(),selectedBook.getAvailable(),reader.getFirstName(),reader.getLastName(),reader.getID(),reader.getEmail(),dt);
-            reader.addToOrderList(od);
-            selectedBook.getOrderd_books().add(od);
-            booksTable.getItems().remove(selectedBook);
-            selectedBook.isAvailable();
+            LocalDate dt;
+            LocalDate newValue = returntime.getValue();
+            if(newValue != null) {
+                dt = newValue;
+            } else {
+                // No date selected
+                dt = LocalDate.now().plusDays(7);  // default return time after 7 days
+            }
+            if (selectedBook != null && selectedBook.isAvailable()) {
+                // Rent the book and update the tables
+                selectedBook.add_to_orderlist(reader);
+                selectedBook.add_to_return_Dates_orderlists(dt);
+                Orderd_Book od = new Orderd_Book(selectedBook.getTitle(),selectedBook.getAuthor(),selectedBook.getISBN(),selectedBook.getGenre(),selectedBook.getAvailable(),reader.getFirstName(),reader.getLastName(),reader.getID(),reader.getEmail(),dt);
+                reader.addToOrderList(od);
+                selectedBook.getOrderd_books().add(od);
+                booksTable.getItems().remove(selectedBook);
+                selectedBook.isAvailable();
         }else
         {
             Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -195,7 +201,7 @@ public class Reader_rent_controller implements Initializable {
                 selectedBook.setAvailable(true);
                 selectedBook.setISBN(1);
             }
-            if ( rentedBook.getReturndate().isBefore(LocalDate.now()) ) {
+            if ( rentedBook.getReturnDate().isBefore(LocalDate.now()) ) {
                 System.out.println("Book returned successfully.");
             }else
             {

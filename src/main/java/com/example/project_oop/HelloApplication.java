@@ -83,10 +83,10 @@ public class HelloApplication extends Application {
                 public void handle(ActionEvent event) {
                     String email = emailTextField.getText(); // Get the email from the email field in your GUI
                     String password = passwordField.getText();
-                    String type = userTypeComboBox.getTypeSelector();
+                    String type = userTypeComboBox.getSelectionModel().getSelectedItem();
                     // Get the password from the password field in your GUI
                     User user_1 = library.checkLogin(email, password , type); // Call the login check method
-                    if (user != null) {
+                    if (user_1 != null) {
                         user = user_1;
                         if ( user instanceof Reader )
                         {
