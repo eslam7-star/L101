@@ -3,6 +3,7 @@ package com.example.project_oop;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -136,7 +137,7 @@ public class LibraryController implements Initializable {
     }
 
     @FXML
-    public void searchUser() {
+    public void searchUser(ActionEvent event) {
         if (!searchText.getText().isEmpty()) {
             // Create a filtered list to store the search results
             ObservableList<User> searchResults = FXCollections.observableArrayList();
@@ -152,14 +153,14 @@ public class LibraryController implements Initializable {
             userstable.setItems(searchResults);
         }else
         {
-            userstable.setItems(allUsers);
+            userstable.getItems().addAll(HelloApplication.library.getUsers());
         }
     }
 
 
 
     @FXML
-    private void searchBook() {
+    private void searchBook(ActionEvent event) {
         String searchTerm = searchtext2.getText().trim(); // Get the search term from the text field
         if(!searchTerm.isEmpty())
         {
@@ -176,13 +177,13 @@ public class LibraryController implements Initializable {
         }
     }else
         {
-            bookTable.setItems(allbooks);
+            bookTable.getItems().addAll(HelloApplication.library.getBooks());
         }
     }
 
 
     @FXML
-    void removeUser() {
+    void removeUser(ActionEvent event) {
         User selectedUser = userstable.getSelectionModel().getSelectedItem();
         if (selectedUser != null && selectedUser != user) {
             // Remove the user from the library
@@ -191,12 +192,12 @@ public class LibraryController implements Initializable {
             allUsers.remove(selectedUser);
         }
         userstable.getItems().clear();
-        userstable.getItems().addAll(allUsers);
+        userstable.getItems().addAll(HelloApplication.library.getUsers());
     }
 
 
     @FXML
-    void addUser() {
+    void addUser(ActionEvent event) {
         User newUser;
         String firstName = firstNameTextField.getText();
         String lastName = lastNameTextField.getText();
@@ -219,9 +220,13 @@ public class LibraryController implements Initializable {
             userstable.getItems().clear();
             userstable.getItems().addAll(allUsers);
         } else {
-            System.out.println("please select a Type");
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setAlertType(Alert.AlertType.WARNING);
+            alert.setContentText("select a Type");
+            alert.show();
         }
     }
+
 
     private void clearUserFields() {
         firstNameTextField.clear();
@@ -239,7 +244,7 @@ public class LibraryController implements Initializable {
     }
 
     @FXML
-    void addBook() {
+    void addBook(ActionEvent event) {
         String title = titleField.getText();
         String inputText = isbnField.getText();
         int isbn = 1;
@@ -262,7 +267,7 @@ public class LibraryController implements Initializable {
 
 
     @FXML
-    void removeBook() {
+    void removeBook(ActionEvent event) {
         Book selectedBook = bookTable.getSelectionModel().getSelectedItem();
         if (selectedBook != null && selectedBook.getISBN() == 1 ) {
             // Remove the book from the library

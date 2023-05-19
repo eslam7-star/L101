@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 import static com.example.project_oop.HelloApplication.loginScene;
 import static com.example.project_oop.HelloApplication.user;
 
+
 public class Controller {
     private final Stage stage_tools = new Stage();
 

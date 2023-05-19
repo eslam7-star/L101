@@ -146,7 +146,7 @@ public class librarian_rent_controller implements Initializable {
     public void rentButtonHandler(ActionEvent event) {
         // Get the selected item from the waitingtable
         Orderd_Book selectedBook = waitingtable.getSelectionModel().getSelectedItem();
-        if (selectedBook != null ) {
+        if (selectedBook != null && selectedBook.getAvailable()) {
             // Get the reader associated with the selected book
             Reader reader = HelloApplication.library.findReaderById(selectedBook.ID);
             // Remove the selected book from the waitinglist
@@ -170,6 +170,8 @@ public class librarian_rent_controller implements Initializable {
             // Update the rentals table view
             rentaltable.getItems().add(rentedBook);
             waitingtable.getItems().remove(selectedBook);
+            allbooks.getItems().clear();
+            allbooks.getItems().addAll(HelloApplication.library.getBooks());
         }
     }
 

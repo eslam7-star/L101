@@ -17,9 +17,9 @@ public class Library {
                 new Librarian("1234", "habiba", "ashraf", "addr", "0123","habiba@gmail.com")
         )));
         books = new ArrayList<>(new ArrayList<>(Arrays.asList(
-                new Book("ISBN001", "Title 1", 4, "Genre 1", true),
-                new Book("ISBN002", "Title 2", 4, "Genre 2", false),
-                new Book("ISBN003", "Title 3", 4, "Genre 3", true)
+                new Book("Title 1", "Author 1", 4, "Genre 1", true),
+                new Book("Title 2", "Author 2", 4, "Genre 2", true),
+                new Book("Title 3", "Author 3", 4, "Genre 3", true)
         )));
 
     }
